@@ -67,48 +67,39 @@ jobs:
 
   test-frontend:
     docker:
-      []
-      # Docker image here
+      - image: circleci/node:13.8.0
     steps:
-      []
       # Checkout code from git
       # Restore from cache
       # Your job code here
                 
   test-backend:
     docker:
-      []
-      # Docker image here
+      - image: circleci/node:13.8.0
     steps:
-      []
       # Checkout code from git
       # Restore from cache
       # Your job code here
             
   scan-frontend:
     docker:
-      []
-      # Docker image here
+      - image: circleci/node:13.8.0
     steps:
-      []
       # Checkout code from git
       # Restore from cache
       # Your job code here
 
   scan-backend:
     docker:
-      []
-      # Docker image here
+      - image: circleci/node:13.8.0
     steps:
-      []
       # Checkout code from git
       # Restore from cache
       # Your job code here
 
   deploy-infrastructure:
     docker:
-      []
-      # Docker image here that supports AWS CLI
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - run:
@@ -142,8 +133,7 @@ jobs:
 
   configure-infrastructure:
     docker:
-      []
-      # Docker image here that supports Ansible
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       # Add ssh keys with fingerprint
@@ -162,8 +152,7 @@ jobs:
 
   run-migrations:
     docker:
-      []
-      # Docker image here that supports NodeJS
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - run:
@@ -180,8 +169,7 @@ jobs:
 
   deploy-frontend:
     docker:
-      []
-      # Docker image here that supports AWS CLI
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - run:
@@ -202,8 +190,7 @@ jobs:
                     
   deploy-backend:
     docker:
-      []
-      # Docker image here that supports Ansible
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       # Add ssh keys with fingerprint
@@ -220,8 +207,7 @@ jobs:
 
   smoke-test:
     docker:
-      []
-      # Lightweight Docker image 
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - run:
@@ -244,8 +230,7 @@ jobs:
 
   cloudfront-update:
     docker:
-      []
-      # Docker image here that supports AWS CLI
+      - image: circleci/node:13.8.0
     steps:
       # Checkout code from git
       - run:
@@ -283,30 +268,30 @@ workflows:
     jobs:
       - build-frontend
       - build-backend
-      - test-frontend:
-          requires: [build-frontend]
-      - test-backend:
-          requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
-      - scan-frontend:
-          requires: [build-frontend]
-      - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
-          filters:
-            branches:
-              only: [test-feature-branch]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]
-      - run-migrations:
-          requires: [configure-infrastructure]
-      - deploy-frontend:
-          requires: [run-migrations]
-      - deploy-backend:
-          requires: [run-migrations]
-      - smoke-test:
-          requires: [deploy-backend, deploy-frontend]
-      - cloudfront-update:
-          requires: [smoke-test]
-      - cleanup:
-          requires: [cloudfront-update]
+#      - test-frontend:
+#          requires: [build-frontend]
+#      - test-backend:
+#          requires: [build-backend]
+#      - scan-backend:
+#          requires: [build-backend]
+#      - scan-frontend:
+#          requires: [build-frontend]
+#      - deploy-infrastructure:
+#          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+#          filters:
+#            branches:
+#              only: [test-feature-branch]
+#      - configure-infrastructure:
+#          requires: [deploy-infrastructure]
+#      - run-migrations:
+#          requires: [configure-infrastructure]
+#      - deploy-frontend:
+#          requires: [run-migrations]
+#      - deploy-backend:
+#          requires: [run-migrations]
+#      - smoke-test:
+#          requires: [deploy-backend, deploy-frontend]
+#      - cloudfront-update:
+#          requires: [smoke-test]
+#      - cleanup:
+#          requires: [cloudfront-update]
